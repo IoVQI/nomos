@@ -1,0 +1,37 @@
+name: Bug report / 缺陷报告
+description: Report a problem in documentation, scripts, or gates. / 报告文档、脚本或闸门的问题。
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please do not include credentials, real hostnames, or personal paths.
+        请勿包含凭据、真实主机名或个人路径。
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened / 现象
+      description: Include the exact command and output. / 请附完整命令与输出。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior / 期望行为
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version / 版本
+      description: Output of `cat VERSION` or the tag you are on.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment / 环境
+      description: OS, Python version, shell.
+    validations:
+      required: false

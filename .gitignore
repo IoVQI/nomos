@@ -1,0 +1,86 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ===== Virtual environments =====
+venv/
+.venv/
+env/
+
+# ===== Jupyter =====
+.ipynb_checkpoints/
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# ===== IDE =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===== Cache directories (可重新生成) =====
+**/_cache/
+*.pkl
+*.pkl.bak
+
+# ===== Secrets & environment =====
+.env
+.env.local
+
+# ===== HTML exports (可重新生成) =====
+# official_docs 的镜像 HTML 属版本控制外内容，其闸门按「是否被 gitignore 排除」分流判定。
+**/*.html
+
+# ===== AI session internals (managed by Claude Code, not tracked) =====
+.claude/scheduled_tasks.json
+.claude/scheduled_tasks.lock
+.claude/worktrees/
+.claude/mailbox/
+.claude/agent-registry.json
+.claude/agent-memory-local
+.claude/first-run
+.claude/assistant-daemon-state.json
+
+# Local/user-specific Claude Code settings (per-machine, not for shared repo)
+.claude/settings.local.json
+
+# ===== Sandbox: 第三方组件原始副本（不入库）=====
+# 克隆件自带嵌套 .git、体积大、版权属第三方；元信息与索引入库于
+# sandbox/external/_registry/ 与 sandbox/external/_index.md。
+# 用 `staging/*` 而非 `staging/`：前者保留目录本身，使保底的 README.md 仍可入库。
+sandbox/external/staging/*
+!sandbox/external/staging/README.md
+
+# ===== 运维知识真值（不入库）=====
+# project/ops/ 下的文档一律用占位符；真值集中在 _local/ 且不进版本库。
+# 保底的 README.md 仍入库（说明去哪找真值），故用 `_local/*` 而非 `_local/`。
+project/ops/_local/*
+!project/ops/_local/README.md
+
+# ===== 凭据与证书（发布前扫描的第二道保险）=====
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+
+# ===== 发布过程产物（工具目录在仓外；此处防止误拷入）=====
+_staging/
+backups/
+*.bundle
+
+# ===== 临时与日志 =====
+*.log
+*.tmp
+*.bak

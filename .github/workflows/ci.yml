@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install check dependencies
+        run: pip install pyyaml
+
+      - name: Workflow registry consistency
+        run: python ai_system/validation/check_workflows.py --quiet
+
+      # 与 pre-commit 的 check-md-fences 同源。CI 为干净克隆，
+      # 因此这里对**全部受跟踪**的 .md 跑一遍——本地钩子只跑暂存件。
+      - name: Markdown fence balance (GFM)
+        run: python ai_system/validation/verify_md_syntax.py --fences-only $(git ls-files '*.md')
+
+      # 公开发布件卫生闸门：开发记录、个人数据、凭据、内部路径一律不得出现。
+      - name: Public hygiene
+        run: python ai_system/validation/check_public_hygiene.py

@@ -1,0 +1,36 @@
+name: Feature request / 功能建议
+description: Suggest a workflow, gate, or structural improvement. / 建议工作流、闸门或结构改进。
+title: "[feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / 要解决的问题
+      description: What failure mode does this address? / 它防止哪一种失效？
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change / 建议方案
+    validations:
+      required: true
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Layer / 所属层
+      options:
+        - workflow definition
+        - skill / command
+        - validation gate
+        - documentation / standards
+        - structure / layout
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered / 考虑过的替代方案
+    validations:
+      required: false

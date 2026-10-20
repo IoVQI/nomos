@@ -1,0 +1,5 @@
+# 统一 LF 行尾：CRLF 会使权限层对 Workflow 脚本报「控制字符」拒绝调用。
+*.js text eol=lf
+*.py text eol=lf
+# .md 也统一 LF：混合行尾会让生成式索引的 EOL 检测在重渲染时反复强化混合态。
+*.md text eol=lf

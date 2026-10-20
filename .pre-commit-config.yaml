@@ -1,0 +1,31 @@
+# 校验闸门：提交时自动运行。
+#
+# 设计原则：只挂**独立可跑**且**目标树存续**的闸门。
+# 🔴 反面教材（本骨架刻意避免）：若某个脚本在其目标目录缺失时 `exit 0` 报绿，
+#    那它就是「永不报警的假闸门」——比没有闸门更危险。此类脚本已一并移除，不在此挂载。
+#
+# 未挂载但可按需运行：
+#   python ai_system/validation/check_claude_md.py    # CLAUDE.md 链接与结构对账（判断层，不进 CI）
+#   python ai_system/validation/check_memory.py       # 跨会话记忆查询工具，非闸门
+
+repos:
+  - repo: local
+    hooks:
+      - id: check-workflows
+        name: Check workflows registry
+        entry: python ai_system/validation/check_workflows.py --quiet
+        language: system
+        files: ^ai_system/(workflows/|version_registry\.md)
+        pass_filenames: false
+        stages: [pre-commit]
+
+      # 围栏配平：文件末尾仍在栏内 ⇒ 其后正文在 GFM 渲染器里整段变成代码块。
+      # 只跑配平（--fences-only），不跑全套检查——否则 table_columns / math_pairing 一类
+      # 与本次改动无关的既有 ERROR 会阻断提交。
+      - id: check-md-fences
+        name: Check markdown fence balance (GFM)
+        entry: python ai_system/validation/verify_md_syntax.py --fences-only
+        language: system
+        files: \.md$
+        pass_filenames: true
+        stages: [pre-commit]
